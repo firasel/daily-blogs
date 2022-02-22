@@ -1,4 +1,6 @@
 import Head from "next/head";
+import AllPosts from "../components/AllPosts/AllPosts";
+import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import LatestPost from "../components/LatestPost/LatestPost";
 import HomeLayout from "../layouts/HomeLayout";
@@ -14,6 +16,8 @@ const Home = () => {
       </Head>
       <Header />
       <LatestPost />
+      <AllPosts />
+      <Footer />
     </div>
   );
 };

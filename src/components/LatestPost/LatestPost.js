@@ -5,8 +5,8 @@ import profileImg from "../../assets/images/profile.jpg";
 
 const LatestPost = () => {
   return (
-    <div className="mt-10 font-[Poppins] mb-20">
-      <h2 className="text-3xl font-semibold mb-5">Latest Post</h2>
+    <div className="mt-10 font-[Poppins]">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-5">Latest Post</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
         <div className="relative w-full cursor-pointer">
           <div className="w-full hover:opacity-80 transition-all duration-300">
