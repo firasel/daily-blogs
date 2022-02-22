@@ -16,7 +16,7 @@ const Hero = () => {
           />
         </div>
         <div className="mt-7">
-          <h3 className="text-2xl font-semibold mb-4 text-[#111827]">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-[#111827]">
             Eum delectus in minima rem
           </h3>
           <p className="text-[#6b7280] text-base hidden sm:block">
@@ -24,7 +24,7 @@ const Hero = () => {
             electronic typesetting, remaining essentially unchanged. It was
             popularised in the...
           </p>
-          <div className="text-sm flex items-center gap-2 mt-5">
+          <div className="text-xs sm:text-sm flex items-center gap-2 mt-5">
             <div className="w-7 h-7">
               <Image className="rounded-full" src={Profile} alt="profile" />
             </div>
@@ -37,14 +37,14 @@ const Hero = () => {
         {[1, 2, 3].map((data) => (
           <div key={data} className="flex gap-5 justify-between">
             <div className="w-3/4 flex flex-col py-2">
-              <h3 className="text-lg font-semibold mb-3 text-[#111827]">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 text-[#111827]">
                 Eum delectus in minima rem
               </h3>
               <p className="text-[#6b7280] text-base hidden sm:block">
                 It has survived not only five centuries, but also the leap into
                 electronic typesetting...
               </p>
-              <div className="text-sm flex items-center gap-2  sm:mt-auto pb-1">
+              <div className="text-xs sm:text-sm flex items-center gap-2  sm:mt-auto pb-1">
                 <div className="w-7 h-7 hidden sm:block">
                   <Image className="rounded-full" src={Profile} alt="profile"/>
                 </div>
