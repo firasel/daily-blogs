@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .modifyContainer {
+    @apply px-4 lg:px-16 xl:px-32 container mx-auto;
+  }
+  .linkHover {
+    @apply py-2 px-5 cursor-pointer rounded-full hover:bg-slate-100 transition-all duration-200;
+  }
+  .active {
+    @apply bg-slate-100;
+  }
+  .linkHoverMobile {
+    @apply w-full py-2 px-5 cursor-pointer hover:bg-slate-100 transition-all duration-200 text-center;
+  }
+}
