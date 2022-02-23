@@ -8,9 +8,9 @@ const Hero = () => {
   return (
     <div className="lg:flex gap-7 mt-5 font-[Poppins]">
       <div className="w-full">
-        <div className="w-full overflow-hidden">
+        <div className="w-full rounded-3xl overflow-hidden">
           <Image
-            className="!h-full rounded-3xl object-cover"
+            layout="responsive"
             src={Image1}
             alt="blog image"
           />
@@ -52,8 +52,8 @@ const Hero = () => {
                 <span className="text-[#6b7280]">Sep 30,2021</span>
               </div>
             </div>
-            <div className="w-2/4 sm:w-1/4 lg:w-1/3 overflow-hidden">
-              <Image className="rounded-2xl" src={Image6} alt="blog image" />
+            <div className="w-2/4 sm:w-1/4 lg:w-1/3 rounded-2xl overflow-hidden">
+              <Image layout="responsive" src={Image6} alt="blog image" />
             </div>
           </div>
         ))}
