@@ -15,4 +15,70 @@
   .linkHoverMobile {
     @apply w-full py-2 px-5 cursor-pointer hover:bg-slate-100 transition-all duration-200 text-center;
   }
+  .tagsInput {
+    @apply bg-slate-300;
+  }
+}
+.ReactTags__tags {
+  position: relative;
+}
+
+/* Styles for the input */
+.ReactTags__tagInput {
+  border-radius: 2px;
+  display: inline-block;
+  width: 100%;
+}
+.ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+  margin: 0;
+  font-size: 16px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  width: 100%;
+  padding: 8px 8px;
+  margin: 1rem 0;
+  outline: none;
+}
+
+.ReactTags__editInput {
+  border-radius: 1px;
+}
+
+.ReactTags__editTagInput {
+  display: inline-flex;
+}
+
+/* Styles for selected tags */
+.ReactTags__selected span.ReactTags__tag {
+  border: 1px solid #ddd;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  line-height: 15px;
+  background: #fe5f55;
+  color: white;
+  display: inline-block;
+  padding: 7px 14px;
+  margin: 0 5px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.ReactTags__selected a.ReactTags__remove {
+  color: #aaa;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.ReactTags__remove {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: white;
+  margin-left: 3px;
+  padding: 2px;
+}
+
+.imageContainer:hover .removeBtn {
+  display: block !important;
 }
