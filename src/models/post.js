@@ -10,6 +10,22 @@ const PostSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    publish: {
+      type: Boolean,
+      default: true,
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   {
     versionKey: false,

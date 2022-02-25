@@ -7,23 +7,30 @@ const PostAdd = async (req, res) => {
   try {
     await dbConnect();
     // Object destructuring
-    const { email, title, content, imgUrl, tags } = req.body;
+    const { email, title, content, imgUrl, tags, publish } = req.body;
     // User check in database
     const userFind = await User.exists({ email });
 
     if (userFind) {
       // Post add in database
-      post.create({ email, title, content, imgUrl, tags }, (err, postData) => {
-        if (!err && postData) {
-          res
-            .status(201)
-            .send(SendResponse(true, "Post created successful.", postData));
-        } else {
-          res
-            .status(500)
-            .send(SendResponse(false, "Found an error from the backend."));
-        }
+      const postCreate = await post.create({
+        email,
+        title,
+        content,
+        imgUrl,
+        tags,
+        publish,
       });
+      // Send post create response
+      if (postCreate) {
+        res
+          .status(201)
+          .send(SendResponse(true, "Post created successful.", postCreate));
+      } else {
+        res
+          .status(500)
+          .send(SendResponse(false, "Found an error from the backend."));
+      }
     } else {
       res.status(404).send(SendResponse(false, "User not found."));
     }

@@ -64,7 +64,7 @@ const NewPost = () => {
   };
 
   // Handle post submit
-  const handlePostCreate = async () => {
+  const handlePostCreate = async (type) => {
     // Tags modify
     const Alltags = (await tags?.map((data) => data.text)) || [];
     // Post data object create
@@ -74,20 +74,27 @@ const NewPost = () => {
       imgUrl,
       content,
       email: session?.user?.email,
+      publish: true,
     };
     // Verify data is correct or not
     postSchema
       .validate(postData)
       .then((res) => {
+        if (type === "draft") res.publish = false;
+        console.log(res);
         // Send request to backend
         axios
           .post("/api/post", res)
           .then((res) => {
             console.log(res.data);
-            SuccessToast("Post created successfully.");
+            type === "draft"
+              ? SuccessToast("Post saved successfully.")
+              : SuccessToast("Post published successfully.");
           })
           .catch((err) => {
-            ErrorToast("Post not created, Please try again.");
+            type === "draft"
+              ? ErrorToast("Post not saved, Please try again.")
+              : ErrorToast("Post not published, Please try again.");
           });
       })
       .catch((err) => {
@@ -212,7 +219,10 @@ const NewPost = () => {
       {/* Post content editor end */}
       {/* Post submit */}
       <div className="flex gap-4 my-4 justify-end">
-        <button className="px-4 py-2 text-gray-700 font-medium tracking-wider bg-slate-200 hover:scale-105 transition-all duration-200 rounded">
+        <button
+          onClick={() => handlePostCreate("draft")}
+          className="px-4 py-2 text-gray-700 font-medium tracking-wider bg-slate-200 hover:scale-105 transition-all duration-200 rounded"
+        >
           Save draft
         </button>
         <button
