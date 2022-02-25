@@ -84,12 +84,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-slate-200">
       <motion.div
         variants={variants}
         initial="sidebarMobile"
         animate={sidebarExpand ? "sidebarMobile" : "sidebarDefault"}
-        className="w-64 sticky top-0 min-h-screen bg-slate-200"
+        className="w-64 sticky top-0 !min-h-screen bg-slate-200"
       >
         <div className="w-fit mx-auto py-2">
           <div className="flex items-start gap-1">

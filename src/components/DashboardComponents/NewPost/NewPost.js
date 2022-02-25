@@ -1,11 +1,13 @@
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { WithContext as ReactTags } from "react-tag-input";
-import { toast } from "react-toastify";
 import "suneditor/dist/css/suneditor.min.css";
+import ErrorToast from "../../../helper/ErrorToast";
+import SuccessToast from "../../../helper/SuccessToast";
 import postSchema from "./postSchema";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
@@ -25,6 +27,7 @@ const NewPost = () => {
   const [imgLoading, setImgLoading] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [tags, setTags] = useState([]);
+  const { data: session } = useSession({});
 
   // Handle tags delete
   const handleDelete = (i) => {
@@ -62,26 +65,34 @@ const NewPost = () => {
 
   // Handle post submit
   const handlePostCreate = async () => {
-    const allTags = (await tags?.map((data) => data.text)) || [];
-    const postData = { title, allTags, imgUrl, content };
+    // Tags modify
+    const Alltags = (await tags?.map((data) => data.text)) || [];
+    // Post data object create
+    const postData = {
+      title,
+      tags: Alltags,
+      imgUrl,
+      content,
+      email: session?.user?.email,
+    };
+    // Verify data is correct or not
     postSchema
       .validate(postData)
       .then((res) => {
-        console.log(res);
-        console.log("Success");
+        // Send request to backend
+        axios
+          .post("/api/post", res)
+          .then((res) => {
+            console.log(res.data);
+            SuccessToast("Post created successfully.");
+          })
+          .catch((err) => {
+            ErrorToast("Post not created, Please try again.");
+          });
       })
       .catch((err) => {
         if (err) {
-          // Error message show
-          toast.error(err?.message || "All inputs required.", {
-            position: "top-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          ErrorToast(err?.message);
         }
       });
   };

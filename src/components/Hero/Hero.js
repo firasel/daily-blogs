@@ -52,7 +52,7 @@ const Hero = () => {
                 <span className="text-[#6b7280]">Sep 30,2021</span>
               </div>
             </div>
-            <div className="w-2/4 sm:w-1/4 lg:w-1/3 rounded-2xl overflow-hidden">
+            <div className="w-2/4 h-fit sm:w-1/4 lg:w-1/3 rounded-2xl overflow-hidden">
               <Image layout="responsive" src={Image6} alt="blog image" />
             </div>
           </div>

@@ -1,12 +1,13 @@
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import ProfileImg from "../../../assets/images/profile1.jpg";
 import { sidebarState } from "../../../atoms/sidebarAtom";
 
 const Topbar = () => {
   const [sidebarExpand, setSidebarExpand] = useRecoilState(sidebarState);
+  const { data: session } = useSession({});
+  console.log(session?.user?.image?.length > 0);
 
   return (
     <div className="py-3 bg-slate-100 flex items-center justify-between">
@@ -20,12 +21,13 @@ const Topbar = () => {
       </div>
       <div className="pr-1 md:pr-3">
         <div className="w-12 h-12 rounded-full overflow-hidden cursor-pointer border-2 p-[3px] border-[#fe5f55]">
-          <Image
-            layout="responsive"
-            className="rounded-full"
-            src={ProfileImg}
-            alt="profile img"
-          />
+          {session?.user?.image && (
+            <img
+              className="rounded-full w-full h-full"
+              src={session?.user?.image}
+              alt="profile img"
+            />
+          )}
         </div>
       </div>
     </div>

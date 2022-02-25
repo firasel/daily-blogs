@@ -1,4 +1,6 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,6 +8,14 @@ import Sidebar from "../components/DashboardComponents/Sidebar/Sidebar";
 import Topbar from "../components/DashboardComponents/Topbar/Topbar";
 
 const DashboardLayout = ({ children }) => {
+  const router = useRouter();
+  const { status, data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/");
+    },
+  });
+
   return (
     <>
       <Head>

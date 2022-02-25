@@ -1,24 +1,29 @@
+import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
 import DashboardLayout from "../layouts/DashboardLayout";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.Layout) {
     return (
-      <RecoilRoot>
-        <Component.Layout>
-          <Component {...pageProps} />
-        </Component.Layout>
-      </RecoilRoot>
+      <SessionProvider session={session}>
+        <RecoilRoot>
+          <Component.Layout>
+            <Component {...pageProps} />
+          </Component.Layout>
+        </RecoilRoot>
+      </SessionProvider>
     );
   }
 
   return (
-    <RecoilRoot>
-      <DashboardLayout>
-        <Component {...pageProps} />
-      </DashboardLayout>
-    </RecoilRoot>
+    <SessionProvider session={session}>
+      <RecoilRoot>
+        <DashboardLayout>
+          <Component {...pageProps} />
+        </DashboardLayout>
+      </RecoilRoot>
+    </SessionProvider>
   );
 }
 
