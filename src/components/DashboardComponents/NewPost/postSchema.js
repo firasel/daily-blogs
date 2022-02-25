@@ -12,6 +12,9 @@ const postSchema = yup.object().shape({
     .required("Post content required.")
     .min(10, "Post content too short."),
   email: yup.string().email("Email is required."),
+  description: yup
+    .string()
+    .min(10, "Description must be at least 10 characters long."),
 });
 
 export default postSchema;

@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { getProviders, useSession } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 import Head from "next/head";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
@@ -13,12 +13,6 @@ import HomeLayout from "../layouts/HomeLayout";
 
 const Home = ({ providers }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
-  const { status, data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      console.log("Not authorized");
-    },
-  });
 
   return (
     <div className="modifyContainer">
@@ -49,7 +43,6 @@ export default Home;
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
-  console.log("server", providers);
   return {
     props: {
       providers,

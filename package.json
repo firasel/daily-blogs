@@ -27,6 +27,7 @@
     "recoil": "^0.6.1",
     "sass": "^1.49.0",
     "suneditor-react": "^3.4.0",
+    "timeago-react": "^3.0.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {

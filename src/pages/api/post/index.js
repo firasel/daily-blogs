@@ -1,4 +1,6 @@
 import PostAdd from "../../../controller/Post/PostAdd";
+import PostGet from "../../../controller/Post/PostGet";
+import PostUpdate from "../../../controller/Post/PostUpdate";
 import SendResponse from "../../../helper/SendResponse";
 
 export default async function post(req, res) {
@@ -6,7 +8,12 @@ export default async function post(req, res) {
     case "POST":
       await PostAdd(req, res);
       break;
-
+    case "GET":
+      await PostGet(req, res);
+      break;
+    case "PUT":
+      await PostUpdate(req, res);
+      break;
     default:
       res
         .status(400)

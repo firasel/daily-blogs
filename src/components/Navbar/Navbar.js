@@ -51,7 +51,7 @@ const Navbar = () => {
               <span className=" linkHover">Contact</span>
             </Link>
             {session && (
-              <Link href="/dashboard" passHref>
+              <Link href="/dashboard/newpost" passHref>
                 <span className=" linkHover">Dashboard</span>
               </Link>
             )}
@@ -108,7 +108,7 @@ const Navbar = () => {
           <h4 className="linkHoverMobile">Contact</h4>
         </Link>
         {session && (
-          <Link href="/dashboard" passHref>
+          <Link href="/dashboard/newpost" passHref>
             <h4 className="linkHoverMobile">Dashboard</h4>
           </Link>
         )}

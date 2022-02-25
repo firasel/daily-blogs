@@ -7,7 +7,8 @@ const PostAdd = async (req, res) => {
   try {
     await dbConnect();
     // Object destructuring
-    const { email, title, content, imgUrl, tags, publish } = req.body;
+    const { email, title, content, imgUrl, tags, publish, description } =
+      req.body;
     // User check in database
     const userFind = await User.exists({ email });
 
@@ -20,6 +21,7 @@ const PostAdd = async (req, res) => {
         imgUrl,
         tags,
         publish,
+        description,
       });
       // Send post create response
       if (postCreate) {

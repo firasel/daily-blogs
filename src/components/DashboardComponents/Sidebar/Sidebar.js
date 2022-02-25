@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { AiFillHome } from "react-icons/ai";
-import { MdPostAdd } from "react-icons/md";
+import { MdOutlineKeyboardBackspace, MdPostAdd } from "react-icons/md";
 import { RiDraftFill, RiFileListFill } from "react-icons/ri";
 import { useRecoilState } from "recoil";
 import { sidebarState } from "../../../atoms/sidebarAtom";
@@ -11,7 +10,6 @@ import useWindowSize from "../../../helper/useWindowSize";
 const Sidebar = () => {
   const router = useRouter();
   const [sidebarExpand, setSidebarExpand] = useRecoilState(sidebarState);
-  console.log(sidebarExpand);
 
   const windowSize = useWindowSize();
 
@@ -19,23 +17,11 @@ const Sidebar = () => {
   useEffect(() => {
     if (windowSize?.width < 668) {
       setSidebarExpand(true);
-    } else {
-      setSidebarExpand(false);
     }
-  }, [windowSize]);
+  }, [windowSize, router]);
 
   // Sidebar menus data
   const sidebarMenus = [
-    {
-      name: "Home",
-      path: "/dashboard",
-      icon: <AiFillHome />,
-    },
-    {
-      name: "Posts",
-      path: "/dashboard/posts",
-      icon: <RiFileListFill />,
-    },
     {
       name: "Create Post",
       path: "/dashboard/newpost",
@@ -45,6 +31,11 @@ const Sidebar = () => {
       name: "Draft",
       path: "/dashboard/draft",
       icon: <RiDraftFill />,
+    },
+    {
+      name: "Posts",
+      path: "/dashboard/posts",
+      icon: <RiFileListFill />,
     },
   ];
 
@@ -84,10 +75,20 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-200">
+    <motion.div
+      initial={{ x: -100 }}
+      animate={{
+        x: 0,
+        transition: {
+          type: "spring",
+          duration: 0.2,
+          damping: 20,
+        },
+      }}
+      className="min-h-screen bg-slate-200 relative"
+    >
       <motion.div
         variants={variants}
-        initial="sidebarMobile"
         animate={sidebarExpand ? "sidebarMobile" : "sidebarDefault"}
         className="w-64 sticky top-0 !min-h-screen bg-slate-200"
       >
@@ -131,8 +132,14 @@ const Sidebar = () => {
             </div>
           ))}
         </div>
+        <div
+          onClick={() => router.push("/")}
+          className="text-2xl absolute bottom-0 px-2 py-2 bg-slate-50 w-full flex justify-center cursor-pointer"
+        >
+          <MdOutlineKeyboardBackspace />
+        </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URIS;
+const MONGODB_URI = process.env.MONGODB_URI_SECOND;
 
 if (!MONGODB_URI) {
   throw new Error(
