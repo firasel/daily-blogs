@@ -15,35 +15,37 @@ const TopPost = ({ headerPosts }) => {
             key={index}
             className="relative w-full cursor-pointer rounded-tr-3xl rounded-bl-3xl overflow-hidden bg-gray-200 hover:scale-[1.02] transition-all duration-200 grid"
           >
-            <div className="w-full h-auto overflow-hidden">
+            <div className="relative w-full h-[15rem] lg:h-[15rem] xl:h-[20rem]">
               <img
-                className="w-full"
+                className="absolute w-full h-full object-cover rounded-md"
                 src={data?.imgUrl}
-                alt="blog cover image"
+                alt="post img"
               />
             </div>
-            <div className="max-h-fit mx-auto w-full px-2 py-2">
-              <h4 className="text-lg font-semibold">{data?.title}</h4>
-              <div className="flex gap-2 mt-2">
-                <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <img
-                    src={
-                      users?.filter((user) => user?.email === data?.email)[0]
-                        ?.image
-                    }
-                    alt="author img"
-                  />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold">
-                    {
-                      users?.filter((user) => user?.email === data?.email)[0]
-                        ?.name
-                    }
-                  </h4>
-                  <p>
-                    <TimeagoReact datetime={data?.updatedAt} />
-                  </p>
+            <div className="w-full flex items-end px-2 py-2">
+              <div className="w-full">
+                <h4 className="text-lg font-semibold">{data?.title}</h4>
+                <div className="w-full flex gap-2 mt-2">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      src={
+                        users?.filter((user) => user?.email === data?.email)[0]
+                          ?.image
+                      }
+                      alt="author img"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold">
+                      {
+                        users?.filter((user) => user?.email === data?.email)[0]
+                          ?.name
+                      }
+                    </h4>
+                    <p>
+                      <TimeagoReact datetime={data?.updatedAt} />
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

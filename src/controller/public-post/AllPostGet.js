@@ -33,7 +33,7 @@ const AllPostGet = async (req, res) => {
       { _id: 0, emailVerified: 0 }
     );
 
-    if (allPosts) {
+    if (allPosts?.length > 0) {
       res.status(200).send(
         SendResponse(true, "Post data get success.", {
           nextPost,

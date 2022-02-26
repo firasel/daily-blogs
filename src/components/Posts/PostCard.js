@@ -1,24 +1,36 @@
-import Image from "next/image";
 import React from "react";
-import Image6 from "../../assets/images/image6.jpg";
-import Profile from "../../assets/images/profile.jpg";
+import TimeagoReact from "timeago-react";
 
-const PostCard = () => {
+const PostCard = ({ data, users }) => {
   return (
     <div className="transition-all duration-300 hover:scale-[1.03] cursor-pointer">
-      <Image className="w-full rounded-md" src={Image6} alt="post img" />
+      <div className="relative w-full h-[15rem] lg:h-[15rem] xl:h-[20rem]">
+        <img
+          className="absolute w-full h-full object-cover rounded-md"
+          src={data.imgUrl}
+          alt="post img"
+        />
+      </div>
       <div className="mt-5">
-        <h4 className="text-lg lg:text-xl">
-          Product Designs Gender Crisis: “If Businesses Dont Adapt Theyll..
-        </h4>
+        <h4 className="text-lg lg:text-xl">{data.title}</h4>
         <div className="text-xs sm:text-sm flex items-center gap-2 mt-5">
           <div className="w-8 h-8">
-            <Image className="rounded-full" src={Profile} alt="profile" />
+            <img
+              className="rounded-full"
+              src={
+                users?.filter((user) => user?.email === data?.email)[0]?.image
+              }
+              alt="profile"
+            />
           </div>
           <div className="leading-4">
-            <span className="text-[#374151] font-semibold">Adam alade</span>
+            <span className="text-[#374151] font-semibold">
+              {users?.filter((user) => user?.email === data?.email)[0]?.name}
+            </span>
             <br />
-            <span className="text-[#6b7280]">Sep 30,2021</span>
+            <span className="text-[#6b7280]">
+              <TimeagoReact datetime={data.updatedAt} />
+            </span>
           </div>
         </div>
       </div>

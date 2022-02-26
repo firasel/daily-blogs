@@ -10,7 +10,7 @@ const PostGet = async (req, res) => {
     const allPosts = await post
       .find({ email, deleted: false, publish: type !== "draft" })
       .sort({ _id: -1 });
-    if (allPosts) {
+    if (allPosts?.length > 0) {
       res
         .status(200)
         .send(SendResponse(true, "Post data get success.", allPosts));
