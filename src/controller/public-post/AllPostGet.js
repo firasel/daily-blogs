@@ -7,18 +7,22 @@ const AllPostGet = async (req, res) => {
   try {
     await dbConnect();
     let { page = 1, limit = 16 } = req.query;
-    let modifyLimit = parseInt(limit) - 1;
+    limit = parseInt(limit);
+    let modifyLimit = limit - 1;
     let modifyPage = parseInt(page) - 1;
     // get latest post
     const allPosts = await post
-      .find({}, { content: 0, tags: 0, publish: 0, deleted: 0 })
+      .find(
+        { deleted: false, publish: true },
+        { content: 0, tags: 0, publish: 0, deleted: 0 }
+      )
       .sort({ _id: -1 })
       .skip(modifyPage * modifyLimit)
-      .limit(parseInt(limit));
+      .limit(limit);
     // Next post available
-    const nextPost = allPosts.length === parseInt(limit);
+    const nextPost = allPosts.length === limit;
     // Remove last element from array
-    allPosts.pop();
+    if (allPosts.length === limit) allPosts?.pop();
 
     // Filter all post unique email
     const usersEmail = await allPosts
@@ -45,7 +49,6 @@ const AllPostGet = async (req, res) => {
       res.status(404).send(SendResponse(false, "Data not found."));
     }
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .send(SendResponse(false, "Found an error from the backend."));

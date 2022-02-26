@@ -12,7 +12,7 @@ import Signin from "../components/Signin/Signin";
 import TopPost from "../components/TopPost/TopPost";
 import HomeLayout from "../layouts/HomeLayout";
 
-const Home = ({ providers, headerPosts }) => {
+const Home = ({ providers, headerPosts, allPosts }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
 
   return (
@@ -25,7 +25,7 @@ const Home = ({ providers, headerPosts }) => {
       </Head>
       <Header headerPosts={headerPosts} />
       <TopPost headerPosts={headerPosts} />
-      <AllPosts />
+      <AllPosts allPosts={allPosts} />
       <Footer />
       <AnimatePresence>
         {modalOpen && (
@@ -52,10 +52,18 @@ export async function getServerSideProps(context) {
     .then((res) => res?.data?.data)
     .catch((err) => []);
 
+  const allPosts = await axios
+    .get(`http://localhost:3000/api/public-post?page=1`, {
+      headers: { type: "all-post" },
+    })
+    .then((res) => res?.data?.data)
+    .catch((err) => {});
+
   return {
     props: {
       providers,
       headerPosts,
+      allPosts,
     },
   };
 }

@@ -49,6 +49,9 @@
   display: inline-flex;
 }
 
+.postContent {
+}
+
 /* Styles for selected tags */
 .ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;

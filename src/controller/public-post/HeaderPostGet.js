@@ -8,8 +8,10 @@ const HeaderPostGet = async (req, res) => {
     await dbConnect();
     // get latest post
     const allPosts = await post
-      .find({}, { content: 0, tags: 0, publish: 0, deleted: 0 })
-      .sort({ _id: -1 })
+      .find(
+        { deleted: false, publish: true },
+        { content: 0, tags: 0, publish: 0, deleted: 0 }
+      )
       .limit(8);
     // Filter all post unique email
     const usersEmail = await allPosts
@@ -35,7 +37,6 @@ const HeaderPostGet = async (req, res) => {
       res.status(404).send(SendResponse(false, "Data not found."));
     }
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .send(SendResponse(false, "Found an error from the backend."));
