@@ -2,11 +2,11 @@ import React from "react";
 import Hero from "../Hero/Hero";
 import Navbar from "../Navbar/Navbar";
 
-const Header = () => {
+const Header = ({ headerPosts }) => {
   return (
     <>
       <Navbar />
-      <Hero />
+      <Hero headerPosts={headerPosts} />
     </>
   );
 };
