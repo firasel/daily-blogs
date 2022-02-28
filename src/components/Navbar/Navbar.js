@@ -59,7 +59,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex gap-2 lg:gap-5 sm:text-base lg:text-lg">
-            {menusData.map((data, index) => (
+            {menusData?.map((data, index) => (
               <Link key={index} href={data.path} passHref>
                 <span
                   className={`${
@@ -115,18 +115,17 @@ const Navbar = () => {
         animate={expand ? "show" : "hide"}
         className="block md:hidden text-lg mt-1 bg-slate-50 rounded-b-lg overflow-hidden"
       >
-        <Link href="/" passHref>
-          <h4 className="active linkHoverMobile">Home</h4>
-        </Link>
-        <Link href="/posts" passHref>
-          <h4 className="linkHoverMobile">Posts</h4>
-        </Link>
-        <Link href="/about" passHref>
-          <h4 className="linkHoverMobile">About</h4>
-        </Link>
-        <Link href="/contact" passHref>
-          <h4 className="linkHoverMobile">Contact</h4>
-        </Link>
+        {menusData?.map((data, index) => (
+          <Link key={index} href={data.path} passHref>
+            <h4
+              className={`${
+                router.pathname === data.path && "active"
+              } linkHoverMobile`}
+            >
+              {data.name}
+            </h4>
+          </Link>
+        ))}
         {session && (
           <Link href="/dashboard/newpost" passHref>
             <h4 className="linkHoverMobile">Dashboard</h4>
