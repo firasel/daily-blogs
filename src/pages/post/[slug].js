@@ -1,5 +1,11 @@
 import axios from "axios";
+import { AnimatePresence } from "framer-motion";
+import { getProviders } from "next-auth/react";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../../atoms/modalAtom";
+import Modal from "../../components/Modal/Modal";
+import Signin from "../../components/Signin/Signin";
 import SinglePost from "../../components/SinglePost/SinglePost";
 import PostLayout from "../../layouts/PostLayout";
 
@@ -22,6 +28,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
+  const providers = await getProviders();
   const postData = await axios
     .get(`http://localhost:3000/api/public-post?id=${params.slug}`, {
       headers: { type: "post" },
@@ -30,16 +37,23 @@ export const getStaticProps = async ({ params }) => {
     .catch((err) => {});
 
   return {
-    props: { postData },
+    props: { postData, providers },
     revalidate: 1,
   };
 };
 
-const Post = ({ postData }) => {
-
+const Post = ({ postData, providers }) => {
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
   return (
     <div>
       <SinglePost postData={postData} />
+      <AnimatePresence>
+        {modalOpen && (
+          <Modal handleClose={() => setModalOpen(false)}>
+            <Signin providers={providers} />
+          </Modal>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

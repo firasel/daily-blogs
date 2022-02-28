@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { VscSearch } from "react-icons/vsc";
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [expand, setExpand] = useState(false);
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const { data: session } = useSession({});
+  const router = useRouter();
 
   const variants = {
     show: {
@@ -22,6 +24,25 @@ const Navbar = () => {
       opacity: 0,
     },
   };
+
+  const menusData = [
+    {
+      path: "/",
+      name: "Home",
+    },
+    {
+      path: "/posts",
+      name: "Posts",
+    },
+    {
+      path: "/about",
+      name: "About",
+    },
+    {
+      path: "/contact",
+      name: "Contact",
+    },
+  ];
 
   return (
     <div>
@@ -38,21 +59,20 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex gap-2 lg:gap-5 sm:text-base lg:text-lg">
-            <Link href="/" passHref>
-              <span className="active linkHover">Home</span>
-            </Link>
-            <Link href="/Post" passHref>
-              <span className=" linkHover">Post</span>
-            </Link>
-            <Link href="/about" passHref>
-              <span className=" linkHover">About</span>
-            </Link>
-            <Link href="/contact" passHref>
-              <span className=" linkHover">Contact</span>
-            </Link>
+            {menusData.map((data, index) => (
+              <Link key={index} href={data.path} passHref>
+                <span
+                  className={`${
+                    router.pathname === data.path && "active"
+                  } linkHover`}
+                >
+                  {data.name}
+                </span>
+              </Link>
+            ))}
             {session && (
               <Link href="/dashboard/newpost" passHref>
-                <span className=" linkHover">Dashboard</span>
+                <span className="linkHover">Dashboard</span>
               </Link>
             )}
           </div>
@@ -98,8 +118,8 @@ const Navbar = () => {
         <Link href="/" passHref>
           <h4 className="active linkHoverMobile">Home</h4>
         </Link>
-        <Link href="/Post" passHref>
-          <h4 className="linkHoverMobile">Post</h4>
+        <Link href="/posts" passHref>
+          <h4 className="linkHoverMobile">Posts</h4>
         </Link>
         <Link href="/about" passHref>
           <h4 className="linkHoverMobile">About</h4>
