@@ -91,6 +91,11 @@ const NewPost = () => {
             type === "draft"
               ? SuccessToast("Post saved successfully.")
               : SuccessToast("Post published successfully.");
+            setContent("");
+            setTitle("");
+            setDescription("");
+            setImgUrl("");
+            setTags([]);
           })
           .catch((err) => {
             type === "draft"
@@ -150,6 +155,7 @@ const NewPost = () => {
         autoFocus
         placeholder="New post title here..."
         type="text"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       {/* Post short description */}
@@ -159,6 +165,7 @@ const NewPost = () => {
         autoFocus
         placeholder="Short description..."
         type="text"
+        value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       {/* Post tags start */}
@@ -176,8 +183,9 @@ const NewPost = () => {
       {/* Post content editor start */}
       <div className="w-full overflow-hidden">
         <SunEditor
-          defaultValue={content}
+          // defaultValue={content}
           onChange={(text) => setContent(text)}
+          setContents={content}
           height="50vh"
           width="auto"
           className="h-44"

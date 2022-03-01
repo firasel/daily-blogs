@@ -3,8 +3,8 @@ import React from "react";
 import TimeagoReact from "timeago-react";
 
 const TopPost = ({ headerPosts }) => {
-  const { posts, users } = headerPosts;
-  const allPosts = posts?.slice(4, 8);
+  const { posts, users } = headerPosts || {};
+  const allPosts = posts?.slice(4, 8) || [];
   const router = useRouter();
 
   return (
@@ -14,12 +14,12 @@ const TopPost = ({ headerPosts }) => {
         {allPosts?.map((data, index) => (
           <div
             key={index}
-            onClick={()=>router.push(`/post/${data._id}`)}
-            className="relative w-full cursor-pointer rounded-tr-3xl rounded-bl-3xl overflow-hidden bg-gray-200 hover:scale-[1.02] transition-all duration-200 grid"
+            onClick={() => router.push(`/post/${data._id}`)}
+            className="relative w-full cursor-pointer rounded-tr-3xl rounded-bl-3xl overflow-hidden bg-slate-50 shadow-lg hover:scale-[1.02] transition-all duration-200 grid"
           >
             <div className="relative w-full h-[15rem] lg:h-[15rem] xl:h-[20rem]">
               <img
-                className="absolute w-full h-full object-cover rounded-md"
+                className="absolute w-full h-full object-cover"
                 src={data?.imgUrl}
                 alt="post img"
               />

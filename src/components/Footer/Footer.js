@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 
 const Footer = () => {
+  const router = useRouter();
   return (
     <div className="mt-10">
       <hr className="border-gray-300" />
@@ -26,8 +28,12 @@ const Footer = () => {
               Quick Links
               <span className="w-12 h-[2.5px] bg-[#fe5f55] absolute -bottom-1 left-0"></span>
             </h4>
-            <h5 className="cursor-pointer">About</h5>
-            <h5 className="cursor-pointer">Contact</h5>
+            <h5
+              className="cursor-pointer"
+              onClick={() => router.push("/about")}
+            >
+              About
+            </h5>
           </div>
         </div>
         <div className="w-full flex sm:justify-end mt-3 sm:mt-0">

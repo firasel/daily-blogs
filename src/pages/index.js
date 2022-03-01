@@ -50,14 +50,14 @@ export async function getServerSideProps() {
       headers: { type: "header-post" },
     })
     .then((res) => res?.data?.data)
-    .catch((err) => []);
+    .catch((err) => null);
 
   const allPosts = await axios
     .get(`http://localhost:3000/api/public-post?page=1`, {
       headers: { type: "all-post" },
     })
     .then((res) => res?.data?.data)
-    .catch((err) => {});
+    .catch((err) => null);
 
   return {
     props: {

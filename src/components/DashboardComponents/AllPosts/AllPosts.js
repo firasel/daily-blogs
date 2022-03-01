@@ -26,7 +26,10 @@ const AllPosts = () => {
       })
       .catch((err) => {
         setLoading(false);
-        ErrorToast("Please reload this page.");
+        if (err?.response?.status === 404 || err?.response?.status === 400) {
+        } else {
+          ErrorToast("Please reload this page.");
+        }
       });
   }, [reload]);
 

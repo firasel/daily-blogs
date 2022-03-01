@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AnimatePresence } from "framer-motion";
 import { getProviders } from "next-auth/react";
+import Head from "next/head";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../atoms/modalAtom";
@@ -46,6 +47,12 @@ const Post = ({ postData, providers }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   return (
     <div>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <SinglePost postData={postData} />
       <AnimatePresence>
         {modalOpen && (

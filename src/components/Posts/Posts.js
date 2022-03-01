@@ -6,11 +6,11 @@ import Loading from "../DashboardComponents/Loading/Loading";
 import PostCard from "./PostCard";
 
 const Posts = ({ postsData }) => {
-  const [allPostData, setAllPostData] = useState(postsData);
+  const [allPostData, setAllPostData] = useState(postsData) || [];
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const { nextPost, posts: allPosts, users } = allPostData;
+  const { nextPost, posts: allPosts, users } = allPostData || {};
 
   useEffect(() => {
     setLoading(true);

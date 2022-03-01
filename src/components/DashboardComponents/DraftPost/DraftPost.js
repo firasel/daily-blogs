@@ -26,7 +26,10 @@ const DraftPost = () => {
       })
       .catch((err) => {
         setLoading(false);
-        ErrorToast("Please reload this page.");
+        if (err?.response?.status === 404 || err?.response?.status === 400) {
+        } else {
+          ErrorToast("Please reload this page.");
+        }
       });
   }, [reload]);
 
@@ -81,7 +84,9 @@ const DraftPost = () => {
                 className="px-2 py-2 md:flex items-center justify-between border-b-[1px] border-gray-300"
               >
                 <div>
-                  <h2 className="text-xl md:text-2xl font-semibold">{data.title}</h2>
+                  <h2 className="text-xl md:text-2xl font-semibold">
+                    {data.title}
+                  </h2>
                   <h5 className="text-gray-500 text-sm md:text-base">
                     CreatedAt: <TimeagoReact datetime={data.createdAt} />
                   </h5>

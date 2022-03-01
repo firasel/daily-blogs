@@ -38,10 +38,6 @@ const Navbar = () => {
       path: "/about",
       name: "About",
     },
-    {
-      path: "/contact",
-      name: "Contact",
-    },
   ];
 
   return (

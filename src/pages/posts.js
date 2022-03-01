@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AnimatePresence } from "framer-motion";
 import { getProviders } from "next-auth/react";
+import Head from "next/head";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
@@ -15,7 +16,13 @@ const Posts = ({ providers, allPosts }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
 
   return (
-    <div className="modifyContainer">
+    <div className="modifyContainer font-[Poppins]">
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <Navbar />
       <AllPosts allPosts={allPosts} />
       <Footer />
@@ -42,7 +49,7 @@ export async function getServerSideProps() {
       headers: { type: "all-post" },
     })
     .then((res) => res?.data?.data)
-    .catch((err) => {});
+    .catch((err) => null);
 
   return {
     props: {
