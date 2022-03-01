@@ -45,6 +45,7 @@ export const getStaticProps = async ({ params }) => {
 
 const Post = ({ postData, providers }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const title = postData?.post?.title ? postData?.post?.title + " - " : "";
   return (
     <div>
       <Head>
@@ -52,6 +53,7 @@ const Post = ({ postData, providers }) => {
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
+        <title>{title} Daily Blogs</title>
       </Head>
       <SinglePost postData={postData} />
       <AnimatePresence>

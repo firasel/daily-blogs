@@ -1,10 +1,17 @@
+import { AnimatePresence } from "framer-motion";
+import { getProviders } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atoms/modalAtom";
 import Footer from "../components/Footer/Footer";
+import Modal from "../components/Modal/Modal";
 import Navbar from "../components/Navbar/Navbar";
+import Signin from "../components/Signin/Signin";
 import SimpleLayout from "../layouts/SimpleLayout";
 
-const About = () => {
+const About = ({ providers }) => {
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
   return (
     <div className="modifyContainer font-[Poppins]">
       <Head>
@@ -12,6 +19,7 @@ const About = () => {
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
+        <title>About - Daily Blogs</title>
       </Head>
       <Navbar />
       <div>
@@ -76,10 +84,24 @@ const About = () => {
         </div>
       </div>
       <Footer />
+      <AnimatePresence>
+        {modalOpen && (
+          <Modal handleClose={() => setModalOpen(false)}>
+            <Signin providers={providers} />
+          </Modal>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
 About.Layout = SimpleLayout;
+
+export const getStaticProps = async () => {
+  const providers = await getProviders();
+  return {
+    props: { providers },
+  };
+};
 
 export default About;

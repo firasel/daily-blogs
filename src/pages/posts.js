@@ -22,6 +22,7 @@ const Posts = ({ providers, allPosts }) => {
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
+        <title>Posts - Daily Blogs</title>
       </Head>
       <Navbar />
       <AllPosts allPosts={allPosts} />

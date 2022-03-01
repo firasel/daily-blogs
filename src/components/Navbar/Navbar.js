@@ -44,7 +44,10 @@ const Navbar = () => {
     <div>
       <div className="flex items-center justify-between py-2">
         <div className="flex items-center gap-4 md:gap-2 lg:gap-12 xl:gap-16">
-          <div className="flex items-start">
+          <div
+            onClick={() => router.push("/")}
+            className="flex items-start cursor-pointer"
+          >
             <span className="text-[2rem] md:text-4xl text-[#fe5f55] font-semibold italic">
               D
             </span>

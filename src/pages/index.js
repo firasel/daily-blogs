@@ -22,6 +22,7 @@ const Home = ({ providers, headerPosts, allPosts }) => {
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
+        <title>Daily Blogs</title>
       </Head>
       <Header headerPosts={headerPosts} />
       <TopPost headerPosts={headerPosts} />
