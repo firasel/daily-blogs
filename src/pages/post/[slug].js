@@ -12,7 +12,9 @@ import PostLayout from "../../layouts/PostLayout";
 
 export const getStaticPaths = async () => {
   const allPostId = await axios
-    .get("http://localhost:3000/api/public-post", { headers: { type: "id" } })
+    .get("https://daily-blogs.vercel.app/api/public-post", {
+      headers: { type: "id" },
+    })
     .then((res) => res?.data?.data)
     .catch((err) => []);
 
@@ -31,7 +33,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const providers = await getProviders();
   const postData = await axios
-    .get(`http://localhost:3000/api/public-post?id=${params.slug}`, {
+    .get(`https://daily-blogs.vercel.app/api/public-post?id=${params.slug}`, {
       headers: { type: "post" },
     })
     .then((res) => res?.data?.data)

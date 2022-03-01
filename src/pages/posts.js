@@ -46,7 +46,7 @@ export async function getServerSideProps() {
   const providers = await getProviders();
 
   const allPosts = await axios
-    .get(`http://localhost:3000/api/public-post?page=1`, {
+    .get(`https://daily-blogs.vercel.app/api/public-post?page=1`, {
       headers: { type: "all-post" },
     })
     .then((res) => res?.data?.data)
