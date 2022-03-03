@@ -5,7 +5,7 @@ import AuthorCard from "../AuthorCard/AuthorCard";
 import Subscribe from "../Subscribe/Subscribe";
 
 const SinglePost = ({ postData }) => {
-  const { post = {}, user = {} } = postData;
+  const { post, user } = postData || { post: {}, user: {} };
   const { data: session } = useSession({});
   return (
     <div className="lg:flex gap-7 font-[Poppins] mt-5 lg:mt-7">
