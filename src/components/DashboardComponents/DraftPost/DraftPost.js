@@ -27,6 +27,7 @@ const DraftPost = () => {
       })
       .catch((err) => {
         setLoading(false);
+        setDraftPost([]);
         if (err?.response?.status === 404 || err?.response?.status === 400) {
         } else {
           ErrorToast("Please reload this page.");

@@ -27,6 +27,7 @@ const AllPosts = () => {
       })
       .catch((err) => {
         setLoading(false);
+        setPublishPost([]);
         if (err?.response?.status === 404 || err?.response?.status === 400) {
         } else {
           ErrorToast("Please reload this page.");
