@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
     .get("https://daily-blogs.vercel.app/api/public-post", {
       headers: { type: "id" },
     })
-    .then((res) => res?.data?.data)
+    .then((res) => res?.data?.data || [])
     .catch((err) => []);
 
   const paths = allPostId.map((data) => {
@@ -36,12 +36,12 @@ export const getStaticProps = async ({ params }) => {
     .get(`https://daily-blogs.vercel.app/api/public-post?id=${params.slug}`, {
       headers: { type: "post" },
     })
-    .then((res) => res?.data?.data)
+    .then((res) => res?.data?.data || {})
     .catch((err) => {});
 
   return {
     props: { postData, providers },
-    revalidate: 1,
+    revalidate: 3,
   };
 };
 
