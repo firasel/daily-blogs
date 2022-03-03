@@ -5,6 +5,7 @@ import Head from "next/head";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../atoms/modalAtom";
+import Loading from "../../components/Loading/Loading";
 import Modal from "../../components/Modal/Modal";
 import Signin from "../../components/Signin/Signin";
 import SinglePost from "../../components/SinglePost/SinglePost";
@@ -39,6 +40,15 @@ export const getStaticProps = async ({ params }) => {
     .then((res) => res?.data?.data || {})
     .catch((err) => {});
 
+  if (!postData) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: { postData, providers },
     revalidate: 3,
@@ -48,6 +58,7 @@ export const getStaticProps = async ({ params }) => {
 const Post = ({ postData, providers }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const title = postData?.post?.title ? postData?.post?.title + " - " : "";
+
   return (
     <div>
       <Head>
@@ -57,7 +68,7 @@ const Post = ({ postData, providers }) => {
         />
         <title>{title} Daily Blogs</title>
       </Head>
-      <SinglePost postData={postData} />
+      {postData ? <SinglePost postData={postData} /> : <Loading />}
       <AnimatePresence>
         {modalOpen && (
           <Modal handleClose={() => setModalOpen(false)}>

@@ -6,7 +6,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import TimeagoReact from "timeago-react";
 import ErrorToast from "../../../helper/ErrorToast";
 import SuccessToast from "../../../helper/SuccessToast";
-import Loading from "../Loading/Loading";
+import Loading from "../../Loading/Loading";
 
 const DraftPost = () => {
   const [draftPost, setDraftPost] = useState([]);

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import ErrorToast from "../../helper/ErrorToast";
-import Loading from "../DashboardComponents/Loading/Loading";
+import Loading from "../Loading/Loading";
 import PostCard from "./PostCard";
 
 const Posts = ({ postsData }) => {

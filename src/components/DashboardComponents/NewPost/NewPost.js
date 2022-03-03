@@ -9,7 +9,7 @@ import { WithContext as ReactTags } from "react-tag-input";
 import "suneditor/dist/css/suneditor.min.css";
 import ErrorToast from "../../../helper/ErrorToast";
 import SuccessToast from "../../../helper/SuccessToast";
-import Loading from "../Loading/Loading";
+import Loading from "../../Loading/Loading";
 import postSchema from "./postSchema";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
